@@ -1,0 +1,17 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="/META-INF/tlds/bctt" prefix="bctt"%>
+
+<form class="form" id="searchform" method="post" action="${pageContext.servletContext.contextPath}/search">
+<table>
+  <tr>
+    <td colspan="2" style="width:100%"><input style="width:100%" type="text" name="query"/></td> 
+  </tr>
+  <tr>
+    <td>
+      <bctt:entityOptions eoInputClass="noclass"  
+          eoTableName="appointment" eoInputName="reponsibility"/>
+    </td>
+    <td><input style="width:auto;" class="button0" type="submit" value="Search"/></td>
+  </tr>    
+</table>
+</form> 

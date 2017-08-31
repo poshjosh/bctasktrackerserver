@@ -1,0 +1,144 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+<meta name=viewport content="width=device-width, initial-scale=1"/>
+
+<%@include file="/META-INF/jspf/detectMobileBrowserAndSetMobileAttribute.jspf"%>  
+
+<c:set var="reqURL">${pageContext.request.requestURL}</c:set>
+<c:if test="${baseURL == null}">
+    <c:set var="baseURL" value="${fn:substring(reqURL, 0, fn:length(reqURL) - fn:length(pageContext.request.requestURI))}" scope="application"/>
+</c:if>
+<c:if test="${contextURL == null}">
+    <c:set var="contextURL" value="${baseURL}${pageContext.request.contextPath}" scope="application"/>
+</c:if>
+<c:if test="${param.mobile != null}">
+  <c:set var="mobile" value="${param.mobile}" scope="session"/>  
+</c:if>
+
+<%--link rel="shortcut icon" href="${contextURL}/images/favicon.ico" /--%>
+<%--link rel="icon" type="image/gif" href="${contextURL}/images/animated_favicon.gif" /--%>
+
+<c:choose>
+  <c:when test="${mobile}">
+    <%--link href="${contextURL}/resources/styles_main0_mobile.css" rel="stylesheet" type="text/css"/--%>
+    <style type="text/css">
+html { font-size: 100%; }/** IE 5/6 hack to enable use of em font sizes */
+body{ height:100%; font-size:16px; }
+#main_container{ 
+    height:100%; font-size:1.5em;
+    margin:auto; border:0; padding:0;  
+    color:#112233; font-family:Verdana,Helvetica,sans-serif,Arial; 
+}
+a{ text-decoration:none; }
+
+.noclass{ }
+
+.form{ background-color:#e5e5f3; width:100%; }
+.form input{ font-size:1.5em; width:100%; }
+.form select{ font-size:1.5em; width:100%; }
+.form textarea{ font-size:1.5em; width:100%; }
+
+.fontSizeNormal{ font-size:1.0em; }
+.faint{font-size: 0.5em; color:#0595b5; }
+.boldRed{ font-weight:900; color:red; font-size:1.5em; } 
+.smaller{ font-size:0.67em; }
+.larger{ font-size:1.34em; }
+.lighter{ color:#777777; }
+.darker{ color:#111111; }
+
+.doNotDisplay{ display:none; }
+.borderless{ margin:0; border:0; padding:0; }
+
+.widthFull{ width:100%; }
+.widthHalf{ width:50%; }
+
+.centered{ text-align:center; }
+
+.bordered{ border:1px solid blue; padding:0 0.25em 0 0.25em; }
+
+#logo{ border:2px outset #EFFFEF; }
+
+#searchresultstable{ width: 100%; }
+#searchresultstable tr { width: 100%; }
+#searchresultstable tr th { background-color:#e5e5f3; text-align:center; vertical-align:central; border-bottom:2px solid gray;}
+#searchresultstable tr td { text-align:justify; vertical-align:top; padding:0.5em; border-bottom:2px solid gray; }
+
+.ying { background-color:#EFFFEF; }
+.yang { background-color:#FFDDDD; }
+
+.userMessage { width:100%; margin:0; border:0; padding:0; color:red; }
+
+#headertable { vertical-align:top; width:100%; margin:0; border:0; padding:0; }
+#headertable tr { vertical-align:top; width:100%; margin:0; border:0; padding:0; }
+#headertable tr td { vertical-align:top; margin:0; border:0; padding:0; }
+#headertable tr td div{ vertical-align:top; }
+
+.button0 { border:2px outset; }
+.button0:hover { border:2px outset; background-color:#abcdef; }
+.button0:active{ border:2px outset; background-color:#abcdef; }
+    </style>
+  </c:when>  
+  <c:otherwise>
+    <%--link href="${contextURL}/resources/styles_main0.css" rel="stylesheet" type="text/css"/--%>
+    <style type="text/css">
+html { font-size: 100%; }/** IE 5/6 hack to enable use of em font sizes */
+body{ height:100%; font-size:16px; }
+#main_container{ 
+    height:100%; font-size:1.25em;
+    margin:auto; border:0; padding:0;  
+    color:#112233; font-family:Verdana,Helvetica,sans-serif,Arial; 
+}
+a{ text-decoration:none; }
+
+.noclass{ }
+
+.form{ background-color:#e5e5f3; }
+.form input{ font-size:1.25em; width:15em; }
+.form select{ font-size:1.25em; width:15em; }
+.form textarea{ font-size:1.25em; width:15em; }
+
+.fontSizeNormal{ font-size:1.0em; }
+.faint{font-size: 0.5em; color:#0595b5; }
+.boldRed{ font-weight:900; color:red; font-size:1.5em; }
+.smaller{ font-size:0.67em; }
+.larger{ font-size:1.34em; }
+.lighter{ color:#777777; }
+.darker{ color:#111111; }
+
+.doNotDisplay{ display:none; }
+.borderless{ margin:0; border:0; padding:0; }
+
+.widthFull{ width:100%; }
+.widthHalf{ width:50%; }
+
+.centered{ text-align:center; }
+
+.bordered{ border:1px solid blue; padding:0 0.25em 0 0.25em; }
+
+#logo{ border:2px outset #EFFFEF; }
+
+#searchresultstable{ width: 100%; }
+#searchresultstable tr { width: 100%; }
+#searchresultstable tr th { background-color:#e5e5f3; text-align:center; vertical-align:central; border-bottom:2px solid gray;}
+#searchresultstable tr td { text-align:justify; vertical-align:top; padding:0.5em; border-bottom:2px solid gray; }
+
+.ying { background-color:#EFFFEF; }
+.yang { background-color:#FFDDDD; }
+
+.userMessage { width:100%; margin:0; border:0; padding:0; color:red; }
+
+#headertable { vertical-align:top; width:100%; margin:0; border:0; padding:0; }
+#headertable tr { vertical-align:top; width:100%; margin:0; border:0; padding:0; }
+#headertable tr td { vertical-align:top; margin:0; border:0; padding:0; }
+#headertable tr td div{ vertical-align:top; }
+
+.button0 { border:2px outset; }
+.button0:hover { border:2px outset; background-color:#abcdef; }
+.button0:active{ border:2px outset; background-color:#abcdef; }
+    </style>
+  </c:otherwise>  
+</c:choose>
+<%--script type="text/javascript" src="${contextURL}/resources/looseboxes.js"></script--%>

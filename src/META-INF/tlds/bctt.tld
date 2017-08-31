@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+  <tlib-version>1.0</tlib-version>
+  <short-name>bctt</short-name>
+  <uri>/META-INF/tlds/bctt</uri>
+  <!-- A validator verifies that the tags are used correctly at JSP
+          translation time. Validator entries look like this: 
+       <validator>
+           <validator-class>com.mycompany.TagLibValidator</validator-class>
+           <init-param>
+              <param-name>parameter</param-name>
+              <param-value>value</param-value>
+           </init-param>
+       </validator>
+    -->
+  <!-- A tag library can register Servlet Context event listeners in
+         case it needs to react to such events. Listener entries look
+         like this: 
+      <listener>
+          <listener-class>com.mycompany.TagLibListener</listener-class> 
+      </listener>
+    -->
+  <tag-file>
+    <name>paginationMessage</name>
+    <path>/META-INF/tags/paginationMessage.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>paginationLinks</name>
+    <path>/META-INF/tags/paginationLinks.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>header</name>
+    <path>/META-INF/tags/header.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>entityOptions</name>
+    <path>/META-INF/tags/entityOptions.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>selectorTag</name>
+    <path>/META-INF/tags/selectorTag.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>basicAuthForm</name>
+    <path>/META-INF/tags/basicAuthForm.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page</name>
+    <path>/META-INF/tags/page.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page_addresponse</name>
+    <path>/META-INF/tags/page_addresponse.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page_addtask</name>
+    <path>/META-INF/tags/page_addtask.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page_error</name>
+    <path>/META-INF/tags/page_error.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page_login</name>
+    <path>/META-INF/tags/page_login.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page_newuser</name>
+    <path>/META-INF/tags/page_newuser.tag</path>
+  </tag-file>
+  <tag-file>
+    <name>page_searchresults</name>
+    <path>/META-INF/tags/page_searchresults.tag</path>
+  </tag-file>
+</taglib>
