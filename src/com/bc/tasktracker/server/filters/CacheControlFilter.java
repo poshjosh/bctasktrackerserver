@@ -30,7 +30,7 @@ public class CacheControlFilter extends BaseFilter {
             throws IOException, ServletException {
         
 //XLogger.getInstance().entering(this.getClass(), "doAfterProcessing", "");
-//long mb4 = Runtime.getRuntime().freeMemory();
+//long mb4 = com.bc.util.Util.availableMemory();
 //long tb4 = System.currentTimeMillis();
         
         // Set the provided HTTP response parameters

@@ -48,7 +48,7 @@ public class CloseTask implements Action<WebApp, Date> {
             
             task.setTimeclosed(output);
             
-            app.getDao(Task.class).begin().mergeAndClose(task);
+            app.getActivePersistenceUnitContext().getDao().begin().mergeAndClose(task);
             
             logger.fine(() -> "Set timeclosed to: " + output + ", task: " + task);
             

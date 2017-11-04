@@ -17,9 +17,9 @@
 package com.bc.tasktracker.server.beans;
 
 import com.bc.appcore.AppCore;
-import com.bc.jpa.EntityController;
-import com.bc.jpa.JpaContext;
-import com.bc.jpa.JpaMetaData;
+import com.bc.jpa.context.PersistenceUnitContext;
+import com.bc.jpa.functions.GetMapForEntity;
+import com.bc.jpa.metadata.PersistenceUnitMetaData;
 import com.bc.tasktracker.server.AttributeNames;
 import java.io.Serializable;
 import java.util.Collections;
@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -50,19 +52,19 @@ public class SelectorBean<E> implements Serializable {
     
     private Map params;
     
-    private JpaContext jpaContext;
+    private PersistenceUnitContext jpaContext;
     
     public void setRequest(HttpServletRequest request) {
         
         final AppCore app = (AppCore)request.getServletContext().getAttribute(AttributeNames.APP);
         
-        jpaContext = Objects.requireNonNull(app.getJpaContext());
+        jpaContext = Objects.requireNonNull(app.getActivePersistenceUnitContext());
 
         params = new HashMap();
         
         if(entityClass == null && tableName != null) {
-            final JpaMetaData metaData = jpaContext.getMetaData();
-            this.entityClass = Objects.requireNonNull(metaData.findEntityClass(tableName));
+            final PersistenceUnitMetaData metaData = jpaContext.getMetaData();
+            this.entityClass = Objects.requireNonNull(metaData.getEntityClass(tableName));
         }
         Objects.requireNonNull(entityClass);
 
@@ -84,16 +86,17 @@ public class SelectorBean<E> implements Serializable {
     }
     
     public E getSingleResult() {
-        return jpaContext.getBuilderForSelect(entityClass).where(entityClass, params).getSingleResultAndClose();
+        return jpaContext.getDao().forSelect(entityClass).where(entityClass, params).getSingleResultAndClose();
     }
     
     public List<E> getResultList() {
-        return jpaContext.getBuilderForSelect(entityClass).where(entityClass, params).getResultsAndClose(offset, limit);
+        return jpaContext.getDao().forSelect(entityClass).where(entityClass, params).getResultsAndClose(offset, limit);
     }
     
     public List<Map<String, ?>> getResultListMappings() {
-        EntityController<E, ?> ec = jpaContext.getEntityController(this.getEntityClass());
-        return ec.toMapList(this.getResultList(), -1);
+        final Function<Object, Map> toMap = new GetMapForEntity();
+        final List output = this.getResultList().stream().map(toMap).collect(Collectors.toList());
+        return output;
     }
     
     public String getTableName() {
@@ -152,7 +155,7 @@ public class SelectorBean<E> implements Serializable {
         this.columnValue = columnValue;
     }
     
-    public JpaContext getJpaContext() {
+    public PersistenceUnitContext getPersistenceUnitContext() {
         return this.jpaContext;
     }
 }

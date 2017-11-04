@@ -49,7 +49,7 @@ public class GetTaskFromParameters implements Function<Map<String, Object>, Task
         final Integer taskid = idOval == null ? null : 
                 idOval instanceof Integer ? (Integer)idOval : Integer.parseInt(idOval.toString());
         final Task task = taskid == null ? (Task)params.get(Task.class.getName()) :
-                app.getDao(Task.class).findAndClose(Task.class, taskid);
+                app.getActivePersistenceUnitContext().getDao().findAndClose(Task.class, taskid);
         if(task == null) {
             throw new ParameterNotFoundException(Task.class.getName());
         }

@@ -17,7 +17,6 @@
 package com.bc.tasktracker.server.beans;
 
 import com.bc.appcore.jpa.SelectionContext;
-import com.bc.appcore.jpa.model.ResultModel;
 import com.bc.appcore.table.model.SearchResultsTableModel;
 import com.bc.appcore.util.Selection;
 import com.bc.tasktracker.server.AttributeNames;
@@ -28,13 +27,14 @@ import java.util.List;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.table.TableModel;
+import com.bc.appcore.jpa.model.EntityResultModel;
 
 /**
  * @author Chinomso Bassey Ikwuagwu on Mar 7, 2017 2:48:14 PM
  */
 public class TableModelBean implements Serializable {
 
-    private ResultModel resultModel;
+    private EntityResultModel resultModel;
     private TableModel tableModel;
     
     private int rowIndex;
@@ -65,7 +65,7 @@ public class TableModelBean implements Serializable {
     
     public boolean isIdColumn() {
         final String columnName = this.getColumnName();
-        return columnName.equals(app.getJpaContext().getMetaData().getIdColumnName(entityType));
+        return columnName.equals(app.getActivePersistenceUnitContext().getMetaData().getIdColumnName(entityType));
     }
     
     public boolean isBooleanType() {

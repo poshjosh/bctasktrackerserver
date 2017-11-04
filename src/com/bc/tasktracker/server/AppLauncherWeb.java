@@ -68,7 +68,7 @@ public class AppLauncherWeb extends AppLauncherCore<WebApp> {
     @Override
     public JpaContextManager getJpaContextManager() {
         Objects.requireNonNull(servletContext);
-        return new JpaContextManagerWeb(servletContext, this.getMasterPersistenceUnitTest());
+        return new TasktrackerWebJpaContextManager(servletContext);
     }
 
     public ServletContext getServletContext() {

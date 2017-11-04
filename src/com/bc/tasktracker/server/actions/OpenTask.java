@@ -71,7 +71,7 @@ public class OpenTask implements Action<WebApp, Date> {
         }
         
         if(updated) {
-            app.getDao(Task.class).begin().mergeAndClose(task);
+            app.getActivePersistenceUnitContext().getDao().begin().mergeAndClose(task);
         }
         
         return output;

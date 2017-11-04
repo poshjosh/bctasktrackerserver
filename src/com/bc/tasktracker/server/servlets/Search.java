@@ -16,7 +16,6 @@
 package com.bc.tasktracker.server.servlets;
 
 import com.bc.appcore.AppCore;
-import com.bc.appcore.jpa.model.ResultModel;
 import com.bc.appcore.table.model.SearchResultsTableModel;
 import com.bc.jpa.dao.SelectDao;
 import com.bc.jpa.search.SearchResults;
@@ -35,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.table.TableModel;
+import com.bc.appcore.jpa.model.EntityResultModel;
 
 /**
  * @author Josh
@@ -127,7 +127,7 @@ public class Search extends BaseServlet {
 
         logger.log(Level.FINER, "Page offset: {0}", pageNumber);
 
-        final ResultModel resultModel = app.getResultModel(Task.class, null);
+        final EntityResultModel resultModel = app.getResultModel(Task.class, null);
         Objects.requireNonNull(resultModel);
         
         TableModel tableModel;
@@ -170,7 +170,7 @@ public class Search extends BaseServlet {
         final TasktrackerSearchContext searchContext = (TasktrackerSearchContext)app.getSearchContext(resultType);
         
         final SelectDao selectDao = searchContext.getSelectDaoBuilder()
-                .jpaContext(app.getJpaContext())
+                .persistenceUnitContext(app.getActivePersistenceUnitContext())
                 .resultType(resultType==null?Task.class:resultType)
                 .textToFind(query==null || query.isEmpty() ? null : query)
                 .deadlineFrom(deadlineFrom)
